@@ -24,7 +24,7 @@ if [[ "$answer" =~ ^[Yy]$ ]]; then
 
   sudo nixos-rebuild switch
 
-  reboot
+  # reboot
 else
   echo "Nixbook Install Cancelled!"
 fi
