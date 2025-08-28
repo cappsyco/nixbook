@@ -5,7 +5,7 @@ if [[ "$answer" =~ ^[Yy]$ ]]; then
   echo "Installing NixBook..."
 
   # Set up local files
-  rm -rf ~/*
+  rm -rf ~/
   mkdir ~/Desktop
   mkdir ~/Documents
   mkdir ~/Downloads
@@ -17,16 +17,13 @@ if [[ "$answer" =~ ^[Yy]$ ]]; then
   # The rest of the install should be hands off
   # Add Nixbook config and rebuild
   sudo sed -i '/hardware-configuration\.nix/a\      /etc/nixbook/base.nix' /etc/nixos/configuration.nix
-  
+
   # Set up flathub repos while we have sudo
   nix-shell -p flatpak --run 'flatpak remote-add --if-not-exists --user flathub https://dl.flathub.org/repo/flathub.flatpakrepo'
   nix-shell -p flatpak --run 'flatpak remote-add --if-not-exists --user cosmic https://apt.pop-os.org/cosmic/cosmic.flatpakrepo'
 
   sudo nixos-rebuild switch
 
-  # Add flathub and some apps
-  flatpak install flathub org.mozilla.firefox -y
-  
   reboot
 else
   echo "Nixbook Install Cancelled!"

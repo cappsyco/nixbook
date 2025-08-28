@@ -1,6 +1,6 @@
 { config, lib, pkgs, ... }:
 let
-  nixChannel = "https://nixos.org/channels/nixos-unstable"; 
+  nixChannel = "https://nixos.org/channels/nixos-unstable";
 
   ## Notify Users Script
   notifyUsersScript = pkgs.writeScript "notify-users.sh" ''
@@ -35,7 +35,7 @@ let
   ## Update Git and Channel Script
   updateGitScript = pkgs.writeScript "update-git.sh" ''
     set -eu
-    
+
     # Update nixbook configs
     ${pkgs.git}/bin/git -C /etc/nixbook reset --hard
     ${pkgs.git}/bin/git -C /etc/nixbook clean -fd
@@ -50,47 +50,6 @@ let
     fi
   '';
 
-  ## Install Flatpak Apps Script
-  installFlatpakAppsScript = pkgs.writeScript "install-flatpak-apps.sh" ''
-    set -eu
-
-    if ${pkgs.flatpak}/bin/flatpak list --app | ${pkgs.gnugrep}/bin/grep -q "org.libreoffice.LibreOffice"; then
-      echo "Flatpaks already installed"
-    else
-
-
-      # Install Flatpak applications
-      ${notifyUsersScript} "Installing Google Chrome" "Please wait while we install Google Chrome..."
-      ${pkgs.flatpak}/bin/flatpak install flathub com.google.Chrome -y
-
-      ${notifyUsersScript} "Installing Zoom" "Please wait while we install Zoom..."
-      ${pkgs.flatpak}/bin/flatpak install flathub us.zoom.Zoom -y
-
-      ${notifyUsersScript} "Installing LibreOffice" "Please wait while we install LibreOffice..."
-      ${pkgs.flatpak}/bin/flatpak install flathub org.libreoffice.LibreOffice -y
-
-      # Fix for zoom flatpak
-      ${pkgs.flatpak}/bin/flatpak override --env=ZYPAK_ZYGOTE_STRATEGY_SPAWN=0 us.zoom.Zoom
-      ${pkgs.flatpak}/bin/flatpak install flathub org.gtk.Gtk3theme.Mint-Y-Dark-Blue -y
-
-
-      users=$(${pkgs.systemd}/bin/loginctl list-sessions --no-legend | ${pkgs.gawk}/bin/awk '{print $1}' | while read session; do
-        loginctl show-session "$session" -p Name | cut -d'=' -f2
-      done | sort -u)
-
-      for user in $users; do
-        [ -n "$user" ] || continue
-        uid=$(id -u "$user") || continue
-        [ -S "/run/user/$uid/bus" ] || continue
-
-        cp /etc/nixbook/config/flatpak_links/* /home/$user/Desktop/
-        chown $user /home/$user/Desktop/*
-      
-        ${notifyUsersScript} "Installing Applications Complete" "Please Log out or restart to start using Nixbook and it's applications!"
-      done
-    fi
-
-  '';
 in
 {
   zramSwap.enable = true;
@@ -117,6 +76,7 @@ in
   };
 
   environment.systemPackages = with pkgs; [
+    firefox
     git
     libnotify
     gawk
@@ -154,7 +114,7 @@ in
     dates = "Mon 3:40";
     options = "--delete-older-than 14d";
   };
-  
+
   # Auto update config, flatpak and channel
   systemd.timers."auto-update-config" = {
   wantedBy = [ "timers.target" ];
@@ -206,7 +166,7 @@ in
       ${updateGitScript}
 
       ${notifyUsersScript} "Starting System Updates" "System updates are installing in the background.  You can continue to use your computer while these are running."
-            
+
       ${pkgs.nixos-rebuild}/bin/nixos-rebuild boot --upgrade
 
       ${notifyUsersScript} "System Updates Complete" "Updates are complete!  Simply reboot the computer whenever is convenient to apply updates."
@@ -229,5 +189,5 @@ in
     builtins.elem (lib.getName pkg) [
     "broadcom-sta" # aka “wl”
   ];
-  
+
 }
