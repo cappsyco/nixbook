@@ -19,8 +19,8 @@ if [[ "$answer" =~ ^[Yy]$ ]]; then
   sudo sed -i '/hardware-configuration\.nix/a\      /etc/nixbook/base.nix' /etc/nixos/configuration.nix
 
   # Set up flathub repos while we have sudo
-  nix-shell -p flatpak --run 'flatpak remote-add --if-not-exists --user flathub https://dl.flathub.org/repo/flathub.flatpakrepo'
-  nix-shell -p flatpak --run 'flatpak remote-add --if-not-exists --user cosmic https://apt.pop-os.org/cosmic/cosmic.flatpakrepo'
+  nix-shell -p flatpak --run 'sudo flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo'
+  nix-shell -p flatpak --run 'sudo flatpak remote-add --if-not-exists cosmic https://apt.pop-os.org/cosmic/cosmic.flatpakrepo'
 
   sudo nixos-rebuild switch
 
