@@ -62,13 +62,13 @@ in
   nixpkgs.config.allowUnfree = true;
   hardware.bluetooth.enable = true;
 
-  # Cosmic Desktop Environment.
-  services.displayManager.cosmic-greeter.enable = true;
-  services.desktopManager.cosmic.xwayland.enable = true;
-  services.desktopManager.cosmic.enable = true;
-
   # Enable MBA Broadcom support
   networking.enableB43Firmware = true;
+
+  # Cosmic Desktop Environment.
+  services.desktopManager.cosmic.enable = true;  
+  services.desktopManager.cosmic.xwayland.enable = true;
+  services.displayManager.cosmic-greeter.enable = true;
 
   # Enable Printing
   services.printing.enable = true;
