@@ -67,6 +67,9 @@ in
   services.desktopManager.cosmic.xwayland.enable = true;
   services.desktopManager.cosmic.enable = true;
 
+  # Enable MBA Broadcom support
+  networking.enableB43Firmware = true;
+
   # Enable Printing
   services.printing.enable = true;
   services.avahi = {
