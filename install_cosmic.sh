@@ -16,7 +16,7 @@ if [[ "$answer" =~ ^[Yy]$ ]]; then
 
   # The rest of the install should be hands off
   # Add Nixbook config and rebuild
-  sudo sed -i '/hardware-configuration\.nix/a\      /etc/nixbook/base.nix' /etc/nixos/configuration.nix
+  sudo sed -i '/hardware-configuration\.nix/a\      /etc/nixbook/base_cosmic.nix' /etc/nixos/configuration.nix
 
   # Set up flathub repos while we have sudo
   nix-shell -p flatpak --run 'sudo flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo'
