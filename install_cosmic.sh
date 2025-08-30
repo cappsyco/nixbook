@@ -12,7 +12,7 @@ if [[ "$answer" =~ ^[Yy]$ ]]; then
   mkdir ~/Pictures
   mkdir ~/.local
   mkdir ~/.local/share
-  cp -R /etc/nixbook/config/applications ~/.local/share/applications
+  cp -R /etc/nixbook/config/applications_cosmic ~/.local/share/applications
 
   # The rest of the install should be hands off
   # Add Nixbook config and rebuild
