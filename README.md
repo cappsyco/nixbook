@@ -10,8 +10,6 @@ The goal is to create a "chromebook like" unbreakable computer to give to basic 
 
 ## Step 1:  Install NixOS, choose the No Desktop option, and Enable unfree software
 
----
-
 ## Step 2:  Reboot, login, and connect to wifi, then hit ESC
 
 ```
