@@ -94,24 +94,6 @@ in
 
   services.flatpak.enable = true;
 
-  # Install Flatpak Applications Service
-  systemd.services."install-flatpak-apps" = {
-    script = ''
-      set -eu
-      ${installFlatpakAppsScript}
-    '';
-    serviceConfig = {
-      Type = "oneshot";
-      User = "root";
-      Restart = "on-failure";
-      RestartSec = "30s";
-    };
-
-    after = [ "network-online.target" "flatpak-system-helper.service" ];
-    wants = [ "network-online.target" ];
-    wantedBy = [ "multi-user.target" ];
-  };
-
   nix.gc = {
     automatic = true;
     dates = "Mon 3:40";
