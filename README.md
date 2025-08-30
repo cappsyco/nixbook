@@ -8,36 +8,34 @@ The goal is to create a "chromebook like" unbreakable computer to give to basic 
 
 ---
 
-## Step 1:  Install NixOS, and choose the No Desktop option.
+## Step 1:  Install NixOS, choose the No Desktop option, and Enable unfree software
 
-## Step 2:  Enable unfree software
+---
 
-## Step 3:  Format your drive however you like (erase disk, swap, no hibernate)
-
-## Step 4:  Reboot, login, and connect to wifi, then hit ESC
+## Step 2:  Reboot, login, and connect to wifi, then hit ESC
 
 ```
 nmtui
 ```
 
-## Step 5:  Switch to unstable
+## Step 3:  Switch to unstable
 ```
 nix-channel --add https://channels.nixos.org/nixos-unstable nixos
 sudo nixos-rebuild switch --upgrade
 ```
 
-## Step 6:  Go to /etc and nix-shell git
+## Step 4:  Go to /etc and nix-shell git
 ```
 cd /etc/
 nix-shell -p git
 ```
 
-## Step 6:  Clone the nixbook repo  (make sure you run as sudo and you're in /etc!)
+## Step 5:  Clone the nixbook repo  (make sure you run as sudo and you're in /etc!)
 ```
 sudo git clone https://github.com/cappsyco/nixbook
 ```
 
-## Step 7:  Run the install script (run this with NO sudo)
+## Step 6:  Run the install script (run this with NO sudo)
 ```
 cd nixbook
 ./install_cosmic.sh
