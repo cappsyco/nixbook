@@ -89,6 +89,8 @@ in
 
   environment.systemPackages = with pkgs; [
     firefox
+    fastfetch
+    vim
     git
     libnotify
     gawk
@@ -96,6 +98,7 @@ in
     sudo
     dconf
     flatpak
+    loupe
     xdg-desktop-portal
     xdg-desktop-portal-cosmic
     system-config-printer
