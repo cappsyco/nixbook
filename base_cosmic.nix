@@ -59,11 +59,10 @@ in
 
   # Kernel / Config
   boot.kernelPackages =  pkgs.linuxPackages_latest;
+  boot.kernelModules = [ "kvm-intel" "wl" ];
+  boot.extraModulePackages = [ config.boot.kernelPackages.broadcom_sta ];
   nixpkgs.config.allowUnfree = true;
   hardware.bluetooth.enable = true;
-
-  # Enable MBA Broadcom support
-  networking.enableB43Firmware = true;
 
   # Cosmic Desktop Environment.
   services.desktopManager.cosmic.enable = true;  
