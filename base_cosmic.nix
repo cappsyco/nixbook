@@ -59,10 +59,10 @@ in
 
   # Mac specific setup
   # hardware.facetimehd.enable = true;
-  # services.mbpfan = {
-  #   enable = true;
-  #   aggressive = true;
-  # };
+  services.mbpfan = {
+    enable = true;
+    aggressive = false;
+  };
 
   # Cosmic Desktop Environment.
   services.desktopManager.cosmic.enable = true;  
@@ -82,6 +82,7 @@ in
     fastfetch
     vim
     git
+    wget
     libnotify
     gawk
     gnugrep
