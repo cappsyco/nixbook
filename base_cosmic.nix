@@ -64,6 +64,18 @@ in
   nixpkgs.config.allowUnfree = true;
   hardware.bluetooth.enable = true;
 
+  # Mac specific setup
+  hardware.facetimehd.enable = true;
+  services.mbpfan = {
+    enable = true;
+    aggressive = false;
+    settings.general = { # even more agressive settings for the fan
+      low_temp = 50;
+      high_temp = 75;
+      max_temp = 85;
+    };
+  };
+
   # Cosmic Desktop Environment.
   services.desktopManager.cosmic.enable = true;  
   services.desktopManager.cosmic.xwayland.enable = true;
