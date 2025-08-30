@@ -58,11 +58,11 @@ in
   hardware.bluetooth.enable = true;
 
   # Mac specific setup
-  hardware.facetimehd.enable = true;
-  services.mbpfan = {
-    enable = true;
-    aggressive = true;
-  };
+  # hardware.facetimehd.enable = true;
+  # services.mbpfan = {
+  #   enable = true;
+  #   aggressive = true;
+  # };
 
   # Cosmic Desktop Environment.
   services.desktopManager.cosmic.enable = true;  
