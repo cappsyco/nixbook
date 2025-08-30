@@ -97,7 +97,7 @@ in
   nix.gc = {
     automatic = true;
     dates = "Mon 3:40";
-    options = "--delete-older-than 14d";
+    options = "--delete-older-than 30d";
   };
 
   # Auto update config, flatpak and channel
