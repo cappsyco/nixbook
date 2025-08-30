@@ -53,9 +53,7 @@ let
 in
 {
   zramSwap.enable = true;
-  systemd.extraConfig = ''
-    DefaultTimeoutStopSec=10s
-  '';
+  systemd.user.extraConfig = ‘‘DefaultTimeoutStopSec=10s’’; 
 
   # Kernel / Config
   boot.kernelPackages =  pkgs.linuxPackages_latest;
