@@ -23,11 +23,6 @@ let
         DBUS_SESSION_BUS_ADDRESS="unix:path=/run/user/$uid/bus" \
         ${pkgs.libnotify}/bin/notify-send "$title" "$body" || true
 
-      # Fix for gnome software nagging user
-      ${pkgs.sudo}/bin/sudo -u "$user" \
-        DBUS_SESSION_BUS_ADDRESS="unix:path=/run/user/$uid/bus" \
-        ${pkgs.dconf}/bin/dconf write /org/gnome/software/flatpak-updates false || true
-
     done
 
   '';
@@ -66,12 +61,7 @@ in
   hardware.facetimehd.enable = true;
   services.mbpfan = {
     enable = true;
-    aggressive = false;
-    settings.general = { # even more agressive settings for the fan
-      low_temp = 50;
-      high_temp = 75;
-      max_temp = 85;
-    };
+    aggressive = true;
   };
 
   # Cosmic Desktop Environment.
